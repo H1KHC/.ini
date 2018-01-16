@@ -1,5 +1,5 @@
-# .ini - An C/C++ ini file handling library
-.ini is an ini file handling library written in C++, which provides C's interface.
+# .ini - A C/C++ ini file handling library
+.ini is a ini file handling library written in C++, which also provides C's interface.
 
 
 
