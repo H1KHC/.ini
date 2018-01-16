@@ -1,0 +1,77 @@
+[
+    {
+        "type":"config",
+        "srcDir":"src/",
+        "includeDir":[
+            "./",
+            "src/"
+        ],
+        "distDir":"bin/"
+    }, {
+        "type":"compiler",
+        "executableName":"g++",
+        "outputFlag":"-c -o",
+        "compileFlag":"-std=c++11"
+    }, {
+        "type":"compiler",
+        "name":"debug",
+        "compileFlag":[
+            "-g",
+            "-D_DEBUG",
+            "-Wall",
+            "-Wextra"
+        ]
+    }, {
+        "type":"compiler",
+        "name":"release",
+        "compileFlag":["-O2", "-g"]
+    }, {
+        "type":"linker",
+        "executableName":"ar",
+        "outputFlag":"rc"
+    }, {
+        "type":"target",
+        "name":"libini.a",
+        "compiler":"release"
+    }, {
+        "type":"target",
+        "name":"libinid.a",
+        "compiler":"debug"
+    }, {
+        "type":"task",
+        "name":"release",
+        "target":"libini.a"
+    }, {
+        "type":"task",
+        "name":"debug",
+        "target":"libinid.a"
+    },
+    
+    {
+        "type":"config",
+        "srcDir":"./",
+        "name":"commandTool"
+    }, {
+        "type":"linker",
+        "name":"commandTool",
+        "executableName":"g++",
+        "outputFlag":"-o",
+        "linkFlag":[
+            "-Lbin",
+            "-lini",
+            "-g"
+        ]
+    }, {
+        "type":"target",
+        "src":"ini.cpp",
+        "name":"ini",
+        "config":"commandTool",
+        "compiler":"debug",
+        "linker":"commandTool",
+        "base":"libini.a"
+    }, {
+        "type":"task",
+        "name":"commandTool",
+        "target":"ini"
+    }
+]
