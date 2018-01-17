@@ -280,6 +280,41 @@ void list() {
 			   "   or  list";
 }
 
+void del() {
+	if(cmds.size() != 3) {
+		cout <<"usage: del [section/key] name\n";
+	} else if(cmds[1] == "section") {
+		if(s && cmds[2] == iniGetSectionName(s)) {
+			iniDeleteSection(s);
+			s = nullptr;
+		} else {
+			s = iniFindSection(f, cmds[2].c_str());
+			if(s == nullptr) {
+				cout <<"Couldn't find such section\n";
+			} else {
+				iniDeleteSection(s);
+				s = nullptr;
+			}
+		}
+	} else if(cmds[1] == "key") {
+		if(k && cmds[2] == iniGetKeyName(k)) {
+			iniDeleteKey(k);
+			k = nullptr;
+		} else if(s) {
+			k = iniFindKey(s, cmds[2].c_str());
+			if(k == nullptr)
+				cout <<"Couldn't find such key\n";
+			else {
+				iniDeleteKey(k);
+				k = nullptr;
+			}
+		} else
+			cout <<"You haven't open a section yet\n";
+	} else {
+		cout <<"usage: del [section/key] name\n";
+	}
+}
+
 static map<string, void(*)()> commandMap;
 
 struct __INIT_AND_DEINIT {
@@ -295,6 +330,8 @@ __INIT_AND_DEINIT() {
 	commandMap["ls"] = list;
 	commandMap["q"] = quit;
 	commandMap["quit"] = quit;
+	commandMap["del"] = del;
+	commandMap["rm"] = del;
 }
 ~__INIT_AND_DEINIT() {
 	cmds.clear();

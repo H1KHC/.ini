@@ -1,7 +1,7 @@
 #include "File.h"
 #include "fastIO.h"
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string.h>
 
 #ifdef _DEBUG
 #define BUFFER_SIZE 256
@@ -9,8 +9,8 @@
 #define BUFFER_SIZE 1048576
 #endif
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
+// #pragma GCC push_options
+// #pragma GCC optimize ("O0")
 
 static FAST_IN<256> in;
 static FAST_OUT<256> out;
@@ -24,9 +24,9 @@ INIFile* iniLoadFile (const char *name) {
 	}
 	f = new INIFile();
 	while(in.get_line(line) > 0) {
-		char *st,
-		*pt = strchr(line, ':'); if(pt) *pt = '\0';
-		 pt = strchr(line, '#'); if(pt) *pt = '\0';	// Cut all the comments
+		char *st, *pt;
+		pt = strchr(line, ':'); if(pt) *pt = '\0';
+		pt = strchr(line, '#'); if(pt) *pt = '\0';	// Cut all the comments
 
 		for(st = line; isspace(*st); ++st); //ltrim
 
@@ -85,4 +85,4 @@ int iniSaveFile (INIFile *f, const char *name) {
 	return INI_SUCCEEDED;
 }
 
-#pragma GCC pop_options
+// #pragma GCC pop_options

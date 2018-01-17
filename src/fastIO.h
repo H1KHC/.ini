@@ -1,6 +1,6 @@
 #ifndef __FAST_IO_H__
 #define __FAST_IO_H__
-#include <cstdio>
+#include <stdio.h>
 
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
