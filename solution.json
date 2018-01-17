@@ -6,7 +6,8 @@
             "./",
             "src/"
         ],
-        "distDir":"bin/"
+        "distDir":"bin/",
+		"installPrefix":"/usr/"
     }, {
         "type":"compiler",
         "executableName":"g++",
@@ -32,11 +33,19 @@
     }, {
         "type":"target",
         "name":"libini.a",
-        "compiler":"release"
+        "compiler":"release",
+        "needInstall":true,
+        "installPrefix":"lib/",
+        "headerPrefix":"include/",
+        "installHeaders":"ini.h"
     }, {
         "type":"target",
         "name":"libinid.a",
-        "compiler":"debug"
+        "compiler":"debug",
+        "needInstall":true,
+        "installPrefix":"lib/",
+        "headerPrefix":"include/",
+        "installHeaders":"ini.h"
     }, {
         "type":"task",
         "name":"release",
